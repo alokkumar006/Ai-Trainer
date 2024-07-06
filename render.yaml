@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: my-node-app
+    env: node
+    buildCommand: npm install
+    startCommand: node app.js
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    build:
+      dockerfilePath: Dockerfile
+    envFile: .env
+
+  - type: web
+    name: python-microservice
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m flask run --host=0.0.0.0 --port=5000
+    envFile: .env
