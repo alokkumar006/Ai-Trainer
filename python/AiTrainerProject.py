@@ -13,6 +13,7 @@ count = 0
 dir = 0
 pTime = 0
 
+
 while True:
     success, img = cap.read()
     img = cv2.resize(img, (900, 700))
