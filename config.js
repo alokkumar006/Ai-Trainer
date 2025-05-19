@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://TeleGuide:TeleGuide%40123@cluster0.hlh9dih.mongodb.net/TelecomData?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log("Database connection to TelecomData done");
-}).catch((error) => {
-    console.error("Database connection error:", error);
-});
+mongoose.connect('mongodb://localhost:27017/FitAi')
+  .then(() => console.log("Database connection to FitAi done"))
+  .catch((error) => console.error("Database connection error:", error));
