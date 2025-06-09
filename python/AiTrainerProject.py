@@ -79,6 +79,6 @@ while True:
     #         pass
     #     except sr.RequestError:
     #         print("Could not request results; check your internet connection.")
-
+print(f"final count is {count}")
 cap.release()
 cv2.destroyWindow()

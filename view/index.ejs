@@ -64,10 +64,11 @@
                         </p> 
                     </div>
                 </div>
-                <div>
-                    <img src="/images/gym-2.jpg" alt="gym" class="services__img animate-img" />
+                <div class="daily-quote animate-img">
+                    <h2>💪 Daily Motivation</h2>
+                    <blockquote><%= quote %></blockquote>
                 </div>
-            </div>
+           </div>
         </div>
         <!-- Member ship section -->
         <!--<div class="memberships">
@@ -133,19 +134,19 @@
                 </div>
                 <div class="team__card animate-team">
                     <p>Squats</p>
-                    <a href="/squats">
+                    <a href="/squats" class="exercise-tile" data-exercise="squats">
                     <img src="/images/squats.jpg"  alt="person" class="team__img" />
                     </a>
                 </div>
                 <div class="team__card animate-team">
                     <p>Bicepscurls</p>
-                    <a href="/dumblecurles">
+                    <a href="/dumblecurles" class="exercise-tile" data-exercise="bicepscurls">
                     <img src="/images/bicepscurls.jpg" alt="person" class="team__img" />
                     </a>
                 </div>
                 <div class="team__card animate-team">
                     <p>Overhead Dumbell Curls</p>
-                    <a href="/over_dumble_curls">
+                    <a href="/over_dumble_curls" class="exercise-tile" data-exercise="dumblecurles">
                     <img src="/images/overhead_dumbell_curls.jpg" alt="person" class="team__img" />
                     </a>
                 </div>
@@ -167,14 +168,14 @@
                     Sign up for our newsletter below to get Rs. 1200 off your first training session
 
                 </p>
-                <form action="#">
+                <!-- <form action="#">
                     <div class="form__wrap">
                         <label for="email">
                             <input type="email" placeholder="Enter your email" id="email">
                         </label>
                         <button class="button" type="submit">Sign up</button>
                     </div>
-                </form>                
+                </form>                 -->
             </div>
         </div>
         <!-- footer section-->
@@ -183,7 +184,7 @@
                 <div class="footer__desc">
                     <h1>Fit-plus</h1>
                     <p>Your Personal AI Trainer</p>
-                    <p id="phone">+91 9987654341</p>
+                    <p id="phone">+91 9xxxxxxxxx</p>
                 </div>
                 <div class="footer__links">
                     <div class="footer__title">Contact Us</div>
@@ -211,4 +212,4 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
         <script src="/js/app.js"></script>
     </body>
-</html
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Summary</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="navbar__logo">Fit.AI</a>
+    </nav>
+
+    <div class="summary-container">
+        <h1>Workout Summary</h1>
+        
+        <div class="summary-card">
+            <h2>User Details</h2>
+            <p><strong>Username:</strong> <%= userData.username %></p>
+            <p><strong>Name:</strong> <%= userData.name %></p>
+            <p><strong>Height:</strong> <%= userData.height %> cm</p>
+            <p><strong>Weight:</strong> <%= userData.weight %> kg</p>
+        </div>
+        
+        <div class="summary-card">
+            <h2>Workout Details</h2>
+            <p><strong>Exercise:</strong> <%= userData.exercise %></p>
+            <p><strong>Repetitions/Steps:</strong> <%= stepCount %></p>
+        </div>
+        
+        <a href="/" class="button">Return to Home</a>
+    </div>
+</body>
+</html>

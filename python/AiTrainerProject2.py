@@ -64,6 +64,6 @@ while True:
 
     # cv2.imshow("Image", img)
     # cv2.waitKey(1)
-
+print(f"final count is {count}")
 cap.release()
 cv2.destroyWindow()
