@@ -11,7 +11,9 @@ const customerSchema = new mongoose.Schema({
     BMI: { type: Number },
     ExerciseName: { type: String },
     StepCount: { type: Number },
-    workoutDate: { type: Date, default: Date.now }
+    workoutDate: { type: Date, default: Date.now },
+    BMI: {type: Number},
+    CaloriesBurned: { type: Number }
   }, { collection: 'CustData' });
   
 

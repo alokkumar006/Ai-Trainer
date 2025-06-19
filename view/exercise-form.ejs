@@ -35,9 +35,50 @@
                 <label for="weight">Weight (kg):</label>
                 <input type="number" id="weight" name="weight" required>
             </div>
+
+            <div class="form-group">
+                <label>Your BMI: <span id="bmiResult">0</span></label>
+                <div id="bmiCategory"></div>
+            </div>
             
             <button type="submit" class="button">Start Exercise</button>
         </form>
     </div>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const heightInput = document.getElementById('height');
+    const weightInput = document.getElementById('weight');
+    const bmiResult = document.getElementById('bmiResult');
+    const bmiCategory = document.getElementById('bmiCategory');
+    
+    function calculateBMI() {
+        const height = heightInput.value / 100; // convert cm to m
+        const weight = weightInput.value;
+        
+        if (height && weight) {
+            const bmi = (weight / (height * height)).toFixed(1);
+            bmiResult.textContent = bmi;
+            
+            // Category logic
+            if (bmi < 18.5) {
+                bmiCategory.textContent = "Underweight";
+                bmiCategory.style.color = "orange";
+            } else if (bmi < 25) {
+                bmiCategory.textContent = "Normal weight";
+                bmiCategory.style.color = "green";
+            } else if (bmi < 30) {
+                bmiCategory.textContent = "Overweight";
+                bmiCategory.style.color = "orange";
+            } else {
+                bmiCategory.textContent = "Obese";
+                bmiCategory.style.color = "red";
+            }
+        }
+    }
+    
+    heightInput.addEventListener('input', calculateBMI);
+    weightInput.addEventListener('input', calculateBMI);
+});
+</script>
 </body>
 </html>

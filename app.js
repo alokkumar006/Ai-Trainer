@@ -182,56 +182,75 @@ app.get('/exercise-form/:exercise', (req, res) => {
   res.render('exercise-form', { exercise });
 });
 
-// Start exercise route
+// In your /start-exercise route
 app.post('/start-exercise', async (req, res) => {
-  try {
-    const { username, name, height, weight, exercise } = req.body;
-    
-    // Store the user data in session
-    req.session.exerciseData = {
-      username,
-      name,
-      height,
-      weight,
-      exercise,
-      startTime: new Date()
-    };
-    
-    // Redirect to the appropriate exercise
-    res.redirect(`/${exercise}`);
-  } catch (err) {
-    console.error('Error:', err);
-    res.status(500).send('Error starting exercise');
-  }
+    try {
+        const { username, name, height, weight, exercise } = req.body;
+        
+        // Calculate BMI
+        const heightInMeters = height / 100;
+        const bmi = (weight / (heightInMeters * heightInMeters)).toFixed(1);
+        
+        // Store the user data in session
+        req.session.exerciseData = {
+            username,
+            name,
+            height,
+            weight,
+            bmi,
+            exercise,
+            startTime: new Date()
+        };
+        
+        res.redirect(`/${exercise}`);
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Error starting exercise');
+    }
 });
 
-// Exercise summary route
-app.get('/exercise-summary', (req, res) => {
-  const exerciseData = req.session.exerciseData || {};
-  const stepCount = req.query.steps || 0;
-  
-  // Create a new workout record in the database
-  if (exerciseData.username) {
-    const FitAi = require('./content');
-    const newWorkout = new FitAi({
-      username: exerciseData.username,
-      Name: exerciseData.name,
-      Height: exerciseData.height,
-      Weight: exerciseData.weight,
-      ExerciseName: exerciseData.exercise,
-      StepCount: stepCount,
-      workoutDate: new Date()
-    });
+// Calorie data (average calories per rep)
+const exerciseCalories = {
+    'dumblecurles': 0.25,       // 0.25 calories per bicep curl
+    'squats': 0.32,             // 0.32 calories per squat
+    'over_dumble_curls': 0.28   // 0.28 calories per overhead curl
+};
+
+// Update your exercise-summary route
+app.get('/exercise-summary', async (req, res) => {
+    const exerciseData = req.session.exerciseData || {};
+    const stepCount = parseFloat(req.query.steps) || 0;
     
-    newWorkout.save()
-      .then(() => console.log('Workout saved'))
-      .catch(err => console.error('Error saving workout:', err));
-  }
-  
-  res.render('exercise-summary', {
-    userData: exerciseData,
-    stepCount: stepCount
-  });
+    try {
+        if (exerciseData.username) {
+            // Calculate calories burned
+            const caloriesBurned = (exerciseCalories[exerciseData.exercise] * stepCount).toFixed(1);
+            
+            const newWorkout = new FitAi({
+                username: exerciseData.username,
+                Name: exerciseData.name,
+                Height: exerciseData.height,
+                Weight: exerciseData.weight,
+                BMI: exerciseData.bmi,
+                ExerciseName: exerciseData.exercise,
+                StepCount: stepCount,
+                CaloriesBurned: caloriesBurned,
+                workoutDate: new Date()
+            });
+            
+            await newWorkout.save();
+            console.log('Workout saved with calories data');
+        }
+        
+        res.render('exercise-summary', {
+            userData: exerciseData,
+            stepCount: stepCount,
+            caloriesBurned: (exerciseCalories[exerciseData.exercise] * stepCount).toFixed(1)
+        });
+    } catch (err) {
+        console.error('Error saving workout:', err);
+        res.status(500).send('Error saving workout data');
+    }
 });
 
 // Exercise routes
