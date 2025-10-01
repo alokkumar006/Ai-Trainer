@@ -16,7 +16,6 @@ while True:
     img = cv2.resize(img, (1000, 720))
     img = detector.findPose(img, False)
     lmList = detector.findPosition(img, False)
-    # print(lmList)
 
     key = cv2.waitKey(1)
     if key == ord('q'):
