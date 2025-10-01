@@ -17,7 +17,7 @@ pTime = 0
 while True:
     success, img = cap.read()
     img = cv2.resize(img, (900, 700))
-    # img = cv2.imread("AiTrainer/test.jpg")
+    # img = cv2.imread("AiTrainer/test")
     img = detector.findPose(img, False)
     lmList = detector.findPosition(img, False)
     # print(lmList)
@@ -35,7 +35,7 @@ while True:
         bar = np.interp(angle, (220, 310), (650, 100))
         # print(angle, per)
 
-        # Check for the dumbbell curls
+        # Check for the dumbbell
         color = (0, 255, 0)
         if per == 100:
             color = (0, 0, 255)
